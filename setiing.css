@@ -14,6 +14,8 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: row;
+  flex-wrap: wrap;
+  position: relative;
 }
 
 /* Sidebar */
@@ -66,12 +68,24 @@ body {
 .main-content {
   flex: 1;
   padding: 30px;
+  min-width: 0;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.hamburger {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
 }
 
 .header .close-btn {
@@ -89,7 +103,7 @@ body {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .profile-pic {
@@ -161,16 +175,30 @@ hr {
   border-top: 1px solid #ccc;
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-  .settings-container {
-    flex-direction: column;
-  }
-
+/* Responsive Sidebar */
+@media (max-width: 768px) {
   .sidebar {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
     width: 100%;
+    z-index: 999;
+    background-color: #efecff;
     border-right: none;
     border-bottom: 1px solid #ccc;
+  }
+
+  .sidebar.show {
+    display: block;
+  }
+
+  .hamburger {
+    display: inline-block;
+  }
+
+  .settings-container {
+    flex-direction: column;
   }
 
   .main-content {
@@ -178,8 +206,9 @@ hr {
   }
 
   .header {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 
